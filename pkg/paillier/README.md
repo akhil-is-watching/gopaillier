@@ -12,7 +12,7 @@ Read more about Paillier Cryptosystems on its [WikiPedia page](https://en.wikipe
 Get package via `go` CLI:
 
 ```sh
-go get github.com/lucasmenendez/gopaillier/pkg/paillier
+go get github.com/akhil-is-watching/gopaillier/pkg/paillier
 ```
 
 ### Basic use
@@ -34,7 +34,7 @@ import (
     "log"
     "math/big"
 
-    "github.com/lucasmenendez/gopaillier/pkg/paillier"
+    "github.com/akhil-is-watching/gopaillier/pkg/paillier"
 )
 
 func main() {
@@ -64,7 +64,7 @@ import (
     "log"
     "math/big"
 
-    "github.com/lucasmenendez/gopaillier/pkg/paillier"
+    "github.com/akhil-is-watching/gopaillier/pkg/paillier"
 )
 
 func main() {

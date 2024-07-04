@@ -4,8 +4,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/lucasmenendez/gopaillier/pkg/number"
-	"github.com/lucasmenendez/gopaillier/pkg/paillier"
+	"github.com/akhil-is-watching/gopaillier/pkg/number"
+	"github.com/akhil-is-watching/gopaillier/pkg/paillier"
 )
 
 func checkArgs(encrypted, plain *number.Number) error {

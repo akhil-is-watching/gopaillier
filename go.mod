@@ -1,3 +1,3 @@
-module github.com/lucasmenendez/gopaillier
+module github.com/akhil-is-watching/gopaillier
 
 go 1.19

@@ -1,7 +1,7 @@
-[![GoDoc](https://godoc.org/github.com/lucasmenendez/gopaillier?status.svg)](https://godoc.org/github.com/lucasmenendez/gopaillier)
-[![Go Report Card](https://goreportcard.com/badge/github.com/lucasmenendez/gopaillier)](https://goreportcard.com/report/github.com/lucasmenendez/gopaillier)
-[![test](https://github.com/lucasmenendez/gopaillier/workflows/test/badge.svg)](https://github.com/lucasmenendez/gopaillier/actions?query=workflow%3Atest)
-[![license](https://img.shields.io/github/license/lucasmenendez/gopaillier)](LICENSE)
+[![GoDoc](https://godoc.org/github.com/akhil-is-watching/gopaillier?status.svg)](https://godoc.org/github.com/akhil-is-watching/gopaillier)
+[![Go Report Card](https://goreportcard.com/badge/github.com/akhil-is-watching/gopaillier)](https://goreportcard.com/report/github.com/akhil-is-watching/gopaillier)
+[![test](https://github.com/akhil-is-watching/gopaillier/workflows/test/badge.svg)](https://github.com/akhil-is-watching/gopaillier/actions?query=workflow%3Atest)
+[![license](https://img.shields.io/github/license/akhil-is-watching/gopaillier)](LICENSE)
 
 # GoPaillier
 Extended version of a Paillier cryptosystem implementation in Go. 
@@ -17,7 +17,7 @@ Extended version of a Paillier cryptosystem implementation in Go.
 
 ### Installation
 ```sh
-go get github.com/lucasmenendez/gopaillier@latest
+go get github.com/akhil-is-watching/gopaillier@latest
 ```
 
 ### Examples

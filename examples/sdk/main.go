@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/lucasmenendez/gopaillier/pkg/number"
-	"github.com/lucasmenendez/gopaillier/pkg/sdk"
+	"github.com/akhil-is-watching/gopaillier/pkg/number"
+	"github.com/akhil-is-watching/gopaillier/pkg/sdk"
 )
 
 func main() {

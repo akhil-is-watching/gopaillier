@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/lucasmenendez/gopaillier/pkg/number"
+	"github.com/akhil-is-watching/gopaillier/pkg/number"
 )
 
 func TestInitClient(t *testing.T) {

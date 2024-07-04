@@ -10,6 +10,8 @@ package paillier
 
 import (
 	"crypto/rand"
+	"encoding/binary"
+	"encoding/hex"
 	"errors"
 	"math/big"
 )
@@ -70,6 +72,108 @@ func NewKeys(size int) (*PrivateKey, error) {
 		d, u, int64(size),
 		&PublicKey{n, nsq, g, int64(size)},
 	}, nil
+}
+
+func (pk *PublicKey) ToHex() (string, error) {
+	nBytes := pk.N.Bytes()
+	nsqBytes := pk.Nsq.Bytes()
+	gBytes := pk.G.Bytes()
+
+	lenBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(lenBytes, uint64(pk.Len))
+
+	allBytes := append(lenBytes, encodeBigInt(nBytes)...)
+	allBytes = append(allBytes, encodeBigInt(nsqBytes)...)
+	allBytes = append(allBytes, encodeBigInt(gBytes)...)
+
+	hexStr := hex.EncodeToString(allBytes)
+	return hexStr, nil
+}
+
+// Deserialize hex string to PublicKey
+func PublicKeyFromHex(hexStr string) (*PublicKey, error) {
+	allBytes, err := hex.DecodeString(hexStr)
+	if err != nil {
+		return nil, err
+	}
+
+	lenBytes := allBytes[:8]
+	len := int64(binary.BigEndian.Uint64(lenBytes))
+
+	offset := 8
+	n, nBytesRead := decodeBigInt(allBytes[offset:])
+	offset += nBytesRead
+
+	nsq, nsqBytesRead := decodeBigInt(allBytes[offset:])
+	offset += nsqBytesRead
+
+	g, _ := decodeBigInt(allBytes[offset:])
+
+	pk := &PublicKey{N: n, Nsq: nsq, G: g, Len: len}
+	return pk, nil
+}
+
+// Serialize PrivateKey to a hex string
+func (pk *PrivateKey) ToHex() (string, error) {
+	dBytes := pk.d.Bytes()
+	uBytes := pk.u.Bytes()
+
+	lenBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(lenBytes, uint64(pk.Len))
+
+	pubKeyHex, err := pk.PubKey.ToHex()
+	if err != nil {
+		return "", err
+	}
+	pubKeyBytes, err := hex.DecodeString(pubKeyHex)
+	if err != nil {
+		return "", err
+	}
+
+	allBytes := append(lenBytes, encodeBigInt(dBytes)...)
+	allBytes = append(allBytes, encodeBigInt(uBytes)...)
+	allBytes = append(allBytes, pubKeyBytes...)
+
+	hexStr := hex.EncodeToString(allBytes)
+	return hexStr, nil
+}
+
+// Deserialize hex string to PrivateKey
+func PrivateKeyFromHex(hexStr string) (*PrivateKey, error) {
+	allBytes, err := hex.DecodeString(hexStr)
+	if err != nil {
+		return nil, err
+	}
+
+	lenBytes := allBytes[:8]
+	len := int64(binary.BigEndian.Uint64(lenBytes))
+
+	offset := 8
+	d, dBytesRead := decodeBigInt(allBytes[offset:])
+	offset += dBytesRead
+
+	u, uBytesRead := decodeBigInt(allBytes[offset:])
+	offset += uBytesRead
+
+	pubKey, err := PublicKeyFromHex(hex.EncodeToString(allBytes[offset:]))
+	if err != nil {
+		return nil, err
+	}
+
+	pk := &PrivateKey{d: d, u: u, Len: len, PubKey: pubKey}
+	return pk, nil
+}
+
+func encodeBigInt(b []byte) []byte {
+	lengthBytes := make([]byte, 4)
+	binary.BigEndian.PutUint32(lengthBytes, uint32(len(b)))
+	return append(lengthBytes, b...)
+}
+
+func decodeBigInt(b []byte) (*big.Int, int) {
+	length := binary.BigEndian.Uint32(b[:4])
+	value := new(big.Int).SetBytes(b[4 : 4+length])
+	return value, int(4 + length)
 }
 
 // Function Encrypt convert the received input big.Int into its encrypted

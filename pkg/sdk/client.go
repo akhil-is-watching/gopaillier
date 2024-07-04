@@ -6,8 +6,8 @@ package sdk
 import (
 	"errors"
 
-	"github.com/lucasmenendez/gopaillier/pkg/number"
-	"github.com/lucasmenendez/gopaillier/pkg/paillier"
+	"github.com/akhil-is-watching/gopaillier/pkg/number"
+	"github.com/akhil-is-watching/gopaillier/pkg/paillier"
 )
 
 // Struct Client contains a Paillier key pair allowing to encrypt and decrypt

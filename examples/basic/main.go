@@ -5,7 +5,7 @@ import (
 	"log"
 	"math/big"
 
-	"github.com/lucasmenendez/gopaillier/pkg/paillier"
+	"github.com/akhil-is-watching/gopaillier/pkg/paillier"
 )
 
 func main() {
